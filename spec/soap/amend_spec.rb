@@ -10,14 +10,14 @@ describe 'makes amends' do
   let(:xpath_text) do
     lambda do |response, xpath|
       Nokogiri::XML(response.body).xpath(
-        xpath, Zuora::RESPONSE_NAMESPACES
+        xpath, ZuoraPeriscope::RESPONSE_NAMESPACES
       ).text
     end
   end
 
   let(:username) { ENV['ZUORA_SANDBOX_USERNAME'] }
   let(:password) { ENV['ZUORA_SANDBOX_PASSWORD'] }
-  let(:client) { Zuora::Soap::Client.new(username, password, true) }
+  let(:client) { ZuoraPeriscope::Soap::Client.new(username, password, true) }
   let(:vcr_options) { { match_requests_on: [:path] } }
   let(:cassette) { 'soap/authentication_success' }
   before { VCR.use_cassette(cassette, vcr_options) { client } }

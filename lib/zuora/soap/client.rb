@@ -17,7 +17,7 @@ module ZuoraPeriscope
       # @param [String] username
       # @param [String] password
       # @param [Boolean] sandbox
-      # @return [Zuora::SoapClient]
+      # @return [ZuoraPeriscope::SoapClient]
       def initialize(username, password, sandbox = true)
         @sandbox = sandbox
         authenticate!(username, password)
@@ -25,7 +25,7 @@ module ZuoraPeriscope
 
       # Fire a request
       # @param [Xml] body - an object responding to .xml
-      # @return [Zuora::Response]
+      # @return [ZuoraPeriscope::Response]
       def request!(body)
         raise 'body must support .to_xml' unless body.respond_to? :to_xml
 
@@ -38,7 +38,7 @@ module ZuoraPeriscope
         # Handle rate limiting
         return handle_rate_limiting(body) if raw_response.status == 429
 
-        response = Zuora::Response.new(raw_response)
+        response = ZuoraPeriscope::Response.new(raw_response)
         begin
           response.handle_errors(response.to_h)
         rescue StandardError => e
@@ -53,7 +53,7 @@ module ZuoraPeriscope
       # @param [Symbol] call_name - one of :create, :subscribe, :amend, :update
       # @return [Faraday:Response] - response
       def call!(call_name, *args)
-        factory = Zuora::Dispatcher.send call_name
+        factory = ZuoraPeriscope::Dispatcher.send call_name
         xml_builder = factory.new(*args).xml_builder
         request_data = envelope_for call_name, xml_builder
         request! request_data
@@ -62,9 +62,9 @@ module ZuoraPeriscope
       private
 
       # @param [Xml] body
-      # @return [Zuora::Response]
+      # @return [ZuoraPeriscope::Response]
       def handle_rate_limiting(body)
-        sleep(Zuora::RETRY_WAITING_PERIOD)
+        sleep(ZuoraPeriscope::RETRY_WAITING_PERIOD)
         request!(body)
       end
 
@@ -87,7 +87,7 @@ module ZuoraPeriscope
 
         handle_auth_response auth_response
       rescue Object => e
-        raise Zuora::Errors::SoapConnectionError, e
+        raise ZuoraPeriscope::Errors::SoapConnectionError, e
       end
 
       # Generate envelope for request
@@ -96,9 +96,9 @@ module ZuoraPeriscope
       # @return [Nokogiri::XML::Builder]
       def envelope_for(call_name, xml_builder_modifier)
         if call_name == :login
-          Zuora::Utils::Envelope.xml(nil, xml_builder_modifier)
+          ZuoraPeriscope::Utils::Envelope.xml(nil, xml_builder_modifier)
         else
-          Zuora::Utils::Envelope.authenticated_xml(@session_token) do |b|
+          ZuoraPeriscope::Utils::Envelope.authenticated_xml(@session_token) do |b|
             xml_builder_modifier.call b
           end
         end
@@ -107,13 +107,13 @@ module ZuoraPeriscope
       # Handle auth response, setting session
       # @params [Faraday::Response]
       # @return [Faraday::Response]
-      # @throw [Zuora::Errors::InvalidCredentials]
+      # @throw [ZuoraPeriscope::Errors::InvalidCredentials]
       def handle_auth_response(response)
         if response.raw.status == 200
           @session_token = extract_session_token response
         else
           message = 'Unable to connect with provided credentials'
-          raise Zuora::Errors::InvalidCredentials, message
+          raise ZuoraPeriscope::Errors::InvalidCredentials, message
         end
         response
       end

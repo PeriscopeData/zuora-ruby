@@ -15,7 +15,7 @@ module ZuoraPeriscope
 
         lambda do |builder|
           builder[:api].generate do
-            Zuora::Utils::Envelope.build_objects builder, OBJECT_TYPE, objects
+            ZuoraPeriscope::Utils::Envelope.build_objects builder, OBJECT_TYPE, objects
           end
         end
       end

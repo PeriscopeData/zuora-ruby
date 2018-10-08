@@ -30,7 +30,7 @@ describe 'creates a subscription' do
     let(:username) { ENV['ZUORA_SANDBOX_USERNAME'] }
     let(:password) { ENV['ZUORA_SANDBOX_PASSWORD'] }
     let(:vcr_options) { { match_requests_on: [:path] } }
-    let(:client) { Zuora::Soap::Client.new(username, password, true) }
+    let(:client) { ZuoraPeriscope::Soap::Client.new(username, password, true) }
 
     ## Authentication
     let!(:auth_response) do
@@ -49,7 +49,7 @@ describe 'creates a subscription' do
         expect(
           subscribe_body_xml.xpath(
             soap_success_xpath,
-            Zuora::RESPONSE_NAMESPACES
+            ZuoraPeriscope::RESPONSE_NAMESPACES
           ).text
         ).to eq 'true'
       end

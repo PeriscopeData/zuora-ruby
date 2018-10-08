@@ -15,14 +15,14 @@
 
 Creating a client to both SOAP and REST API is easy:
 ```ruby
-client = Zuora::Client.new(<username>, <password>)
+client = ZuoraPeriscope::Client.new(<username>, <password>)
 ```
 This will cache the login credentials (don't worry, they're excluded from being logged). Upon using methods requiring SOAP or REST client, that client is lazily authenticated against the respective API. The resulting session is cached and used in subsequent requests.
 
 It's possible to use the clients directly:
 ```ruby
-soap_client = Zuora::Soap::Client.new(<username>, <password>)
-rest_client = Zuora::Rest::Client.new(<username>, <password>)
+soap_client = ZuoraPeriscope::Soap::Client.new(<username>, <password>)
+rest_client = ZuoraPeriscope::Rest::Client.new(<username>, <password>)
 ```
 
 ### SOAP Calls
@@ -48,7 +48,7 @@ client.call! :subscribe,
   rate_plan: {...}
 ```
 
-SOAP requests return a `Zuora::Response` object that parses the XML response into Ruby data via the `#to_h` method. The raw request is available via the `#raw` method.
+SOAP requests return a `ZuoraPeriscope::Response` object that parses the XML response into Ruby data via the `#to_h` method. The raw request is available via the `#raw` method.
 
 ### REST
 ```ruby

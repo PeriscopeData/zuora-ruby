@@ -35,9 +35,9 @@ module ZuoraPeriscope
         SIMPLE_OBJECTS.each do |obj_name|
           obj = send obj_name
           next unless obj
-          zuora_name = Zuora::Utils::Envelope.to_zuora_key obj_name
+          zuora_name = ZuoraPeriscope::Utils::Envelope.to_zuora_key obj_name
           builder[:api].send(zuora_name) do
-            Zuora::Utils::Envelope.build_fields(builder, :obj, obj)
+            ZuoraPeriscope::Utils::Envelope.build_fields(builder, :obj, obj)
           end
         end
       end
@@ -47,7 +47,7 @@ module ZuoraPeriscope
       def build_complex_objects(builder)
         if subscribe_options
           builder[:api].SubscribeOptions do
-            Zuora::Utils::Envelope.build_fields(builder, :api, subscribe_options)
+            ZuoraPeriscope::Utils::Envelope.build_fields(builder, :api, subscribe_options)
           end
         end
 
@@ -78,7 +78,7 @@ module ZuoraPeriscope
       # [Nokogiri::XML::Builder] builder
       # [Hash] data
       def build_fields(builder, data)
-        Zuora::Utils::Envelope.build_fields(builder, :obj, data)
+        ZuoraPeriscope::Utils::Envelope.build_fields(builder, :obj, data)
       end
     end
   end

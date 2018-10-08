@@ -9,7 +9,7 @@ module ZuoraPeriscope
       # @param [Callable] body  - optional function of builder, rtns builder
       def self.xml(header, body)
         Nokogiri::XML::Builder.new do |builder|
-          builder[:soapenv].Envelope(Zuora::NAMESPACES) do
+          builder[:soapenv].Envelope(ZuoraPeriscope::NAMESPACES) do
             builder[:soapenv].Header { header.call builder } if header
             builder[:soapenv].Body { body.call builder } if body
           end
@@ -39,7 +39,7 @@ module ZuoraPeriscope
       # @param [Nokogiri::XML::Builder] builder
       # @param [Symbol] namespace
       # @param [Hash] key
-      # @param [Hash|Zuora::Soap::ZObject|NilClass|Object] value
+      # @param [Hash|ZuoraPeriscope::Soap::ZObject|NilClass|Object] value
       # @return nil
       def self.build_field(builder, namespace, key, value)
         zuora_field_name = to_zuora_key(key)
@@ -47,7 +47,7 @@ module ZuoraPeriscope
         case value
         when Hash
           builder[namespace].send(zuora_field_name) { build_fields_thunk[] }
-        when Zuora::Soap::ZObject
+        when ZuoraPeriscope::Soap::ZObject
           zuora_type = to_zuora_key(value.type)
           xsi = { 'xsi:type' => "obj:#{zuora_type}" }
           builder[:api].send(zuora_field_name) do
@@ -78,7 +78,7 @@ module ZuoraPeriscope
       def self.build_objects(builder, type, objects)
         objects.each do |object|
           builder[:api].zObjects('xsi:type' => "obj:#{type}") do
-            Zuora::Utils::Envelope.build_fields(builder, :obj, object)
+            ZuoraPeriscope::Utils::Envelope.build_fields(builder, :obj, object)
           end
         end
       end

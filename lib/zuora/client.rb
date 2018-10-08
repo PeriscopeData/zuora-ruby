@@ -49,11 +49,11 @@ module ZuoraPeriscope
 
     # Lazily connects SOAP / RESTS clients when needed; memoizes results
     def soap_client
-      @soap_client ||= Zuora::Soap::Client.new(@username, @password, @sandbox)
+      @soap_client ||= ZuoraPeriscope::Soap::Client.new(@username, @password, @sandbox)
     end
 
     def rest_client
-      @rest_client ||= Zuora::Rest::Client.new(@username, @password, @sandbox)
+      @rest_client ||= ZuoraPeriscope::Rest::Client.new(@username, @password, @sandbox)
     end
   end
 end

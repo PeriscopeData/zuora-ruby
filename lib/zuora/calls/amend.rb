@@ -35,7 +35,7 @@ module ZuoraPeriscope
       # @param [Enumerable or Object] - parent or child node
       # @return nil
       def build_node(builder, child_ns, field, value)
-        field = Zuora::Utils::Envelope.to_zuora_key field
+        field = ZuoraPeriscope::Utils::Envelope.to_zuora_key field
         if value.respond_to?(:each)
           # Parent
           builder[:api].send(field) { build_nodes builder, value, child_ns }
@@ -61,7 +61,7 @@ module ZuoraPeriscope
       # @return nil
       def build_object(builder, property_name, object, child_ns)
         raise 'Objects must respond to each' unless object.respond_to?(:each)
-        object_name = Zuora::Utils::Envelope.to_zuora_key property_name
+        object_name = ZuoraPeriscope::Utils::Envelope.to_zuora_key property_name
         builder[:api].send(object_name) do
           build_nodes builder, object, child_ns
         end

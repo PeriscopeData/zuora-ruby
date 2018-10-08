@@ -7,7 +7,7 @@ describe 'create' do
   let(:vcr_options) do
     { match_requests_on: [:path] }
   end
-  let(:client) { Zuora::Soap::Client.new(username, password, true) }
+  let(:client) { ZuoraPeriscope::Soap::Client.new(username, password, true) }
 
   let!(:auth_response) do
     VCR.use_cassette('soap/authentication_success') do
@@ -40,7 +40,7 @@ describe 'create' do
 
         let(:status) do
           Nokogiri::XML(response.raw.body).xpath(
-            success_xpath, Zuora::RESPONSE_NAMESPACES
+            success_xpath, ZuoraPeriscope::RESPONSE_NAMESPACES
           ).text
         end
 
@@ -72,12 +72,12 @@ describe 'create' do
 
         let(:status) do
           Nokogiri::XML(response.raw.body).xpath(
-            success_xpath, Zuora::RESPONSE_NAMESPACES
+            success_xpath, ZuoraPeriscope::RESPONSE_NAMESPACES
           ).text
         end
 
         it 'raises an exception' do
-          expect { subject }.to raise_error(Zuora::Errors::InvalidValue)
+          expect { subject }.to raise_error(ZuoraPeriscope::Errors::InvalidValue)
         end
 
         it 'includes the full response on the error that gets raised' do

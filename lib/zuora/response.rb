@@ -8,7 +8,7 @@ module ZuoraPeriscope
     attr_reader :raw
 
     # @param [Faraday::Response]
-    # @return [Zuora::Response]
+    # @return [ZuoraPeriscope::Response]
     def initialize(response)
       @raw = response
     end
@@ -77,7 +77,7 @@ module ZuoraPeriscope
     # @param [Array] errors
     def raise_errors(errors)
       error_string = errors.join(',')
-      error = Zuora::Errors::InvalidValue.new(error_string, to_h)
+      error = ZuoraPeriscope::Errors::InvalidValue.new(error_string, to_h)
       raise error
     end
   end

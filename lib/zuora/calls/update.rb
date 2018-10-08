@@ -2,7 +2,7 @@
 
 module ZuoraPeriscope
   module Calls
-    class Update < Zuora::Calls::Upsert
+    class Update < ZuoraPeriscope::Calls::Upsert
       def call_name
         :update
       end

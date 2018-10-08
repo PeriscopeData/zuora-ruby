@@ -6,18 +6,18 @@ if ENV['ZUORA_SANDBOX_USERNAME'].nil? || ENV['ZUORA_SANDBOX_PASSWORD'].nil?
   raise 'Please set ZUORA_SANDBOX_USERNAME and ZUORA_SANDBOX_PASSWORD in .env'
 end
 
-describe Zuora::Rest::Client do
+describe ZuoraPeriscope::Rest::Client do
   context 'with invalid credentials' do
     let(:username) { 'bad' }
     let(:password) { 'bad' }
     let(:client) do
       VCR.use_cassette('rest/auth_failure') do
-        Zuora::Rest::Client.new username, password, true
+        ZuoraPeriscope::Rest::Client.new username, password, true
       end
     end
 
     it 'fails to authenticate' do
-      expect { client }.to raise_exception(Zuora::Rest::ConnectionError)
+      expect { client }.to raise_exception(ZuoraPeriscope::Rest::ConnectionError)
     end
   end
 
@@ -26,7 +26,7 @@ describe Zuora::Rest::Client do
     let(:password) { ENV['ZUORA_SANDBOX_PASSWORD'] }
     let(:client) do
       VCR.use_cassette('rest/auth_success') do
-        Zuora::Rest::Client.new username, password, true
+        ZuoraPeriscope::Rest::Client.new username, password, true
       end
     end
 
@@ -37,12 +37,12 @@ describe Zuora::Rest::Client do
     context 'with rate limiting' do
       let(:client) do
         VCR.use_cassette('rest/auth_success_rate_limited') do
-          Zuora::Rest::Client.new username, password, true
+          ZuoraPeriscope::Rest::Client.new username, password, true
         end
       end
 
       before do
-        Zuora::RETRY_WAITING_PERIOD = 0.1
+        ZuoraPeriscope::RETRY_WAITING_PERIOD = 0.1
       end
 
       it 'retries the request' do
@@ -109,7 +109,7 @@ describe Zuora::Rest::Client do
             expect do
               client.get "/rest/v1/accounts/#{account_id}x"
             end.to raise_error(
-              Zuora::Rest::ErrorResponse,
+              ZuoraPeriscope::Rest::ErrorResponse,
               error_text
             )
           end
@@ -120,7 +120,7 @@ describe Zuora::Rest::Client do
             expect do
               client.get "/rest/v1/accounts/#{account_id}"
             end.to raise_error(
-              Zuora::Rest::ErrorResponse,
+              ZuoraPeriscope::Rest::ErrorResponse,
               'HTTP Status 500'
             )
           end

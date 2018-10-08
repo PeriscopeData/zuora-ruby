@@ -15,7 +15,7 @@ module ZuoraPeriscope
       # @param [Symbol|Nil] where - hash of equalities for where clauses
       #    Operations: only = is supported
       #    Custom field names are supported: some_field__c => SomeField__c
-      # @return [Zuora::Calls:Query]
+      # @return [ZuoraPeriscope::Calls:Query]
       def initialize(select, from = nil, where = nil)
         @query_string = if select.is_a? Array
                           query_to_string(select, from, where)
@@ -41,7 +41,7 @@ module ZuoraPeriscope
         raise 'Table must respond to :to_sym' unless table.respond_to?(:to_sym)
         raise 'Conditions must be Array' if fields && !fields.is_a?(Array)
 
-        key_fn = ->(key) { Zuora::Utils::Envelope.to_zuora_key(key) }
+        key_fn = ->(key) { ZuoraPeriscope::Utils::Envelope.to_zuora_key(key) }
 
         select = fields.map { |field| key_fn[field] }.join(', ').to_s
         from = table.to_s

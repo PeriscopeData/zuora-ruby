@@ -2,7 +2,7 @@
 
 module ZuoraPeriscope
   module Calls
-    class Create < Zuora::Calls::Upsert
+    class Create < ZuoraPeriscope::Calls::Upsert
       def call_name
         :create
       end

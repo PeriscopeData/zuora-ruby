@@ -17,7 +17,7 @@ module ZuoraPeriscope
       # @param [String] username
       # @param [String] password
       # @param [Boolean] sandbox
-      # @return [Zuora::Client] with .connection, .put, .post
+      # @return [ZuoraPeriscope::Client] with .connection, .put, .post
       def initialize(username, password, sandbox = false)
         base_url = api_url sandbox
         conn = connection base_url
@@ -31,10 +31,10 @@ module ZuoraPeriscope
           @auth_cookie = response.headers['set-cookie'].split(' ')[0]
           @connection = conn
         when 429
-          sleep(Zuora::RETRY_WAITING_PERIOD)
+          sleep(ZuoraPeriscope::RETRY_WAITING_PERIOD)
           return initialize(username, password, sandbox)
         else
-          raise Zuora::Rest::ConnectionError, response.body['reasons']
+          raise ZuoraPeriscope::Rest::ConnectionError, response.body['reasons']
         end
       end
 
@@ -78,7 +78,7 @@ module ZuoraPeriscope
       # @param [String] url
       # @param [Hash] params
       def handle_rate_limiting(method, url, params = nil)
-        sleep(Zuora::RETRY_WAITING_PERIOD)
+        sleep(ZuoraPeriscope::RETRY_WAITING_PERIOD)
         if params.present?
           send(method, url, params)
         else
@@ -143,7 +143,7 @@ module ZuoraPeriscope
       # @param [Boolean] sandbox - Use the sandbox url?
       # @return [String] url
       def api_url(sandbox)
-        sandbox ? Zuora::Rest::SANDBOX_URL : Zuora::Rest::API_URL
+        sandbox ? ZuoraPeriscope::Rest::SANDBOX_URL : ZuoraPeriscope::Rest::API_URL
       end
     end
   end

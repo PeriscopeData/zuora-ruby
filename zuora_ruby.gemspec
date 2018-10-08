@@ -6,7 +6,7 @@ require 'zuora/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'zuora-ruby-periscope'
-  spec.version = Zuora::VERSION
+  spec.version = ZuoraPeriscope::VERSION
   spec.authors = ['Contactually Engineering']
   spec.email = ['engineering@contactually.com']
 

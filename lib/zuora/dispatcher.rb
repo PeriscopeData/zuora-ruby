@@ -6,39 +6,39 @@ module ZuoraPeriscope
 
     class << self
       def create
-        Zuora::Calls::Create
+        ZuoraPeriscope::Calls::Create
       end
 
       def update
-        Zuora::Calls::Update
+        ZuoraPeriscope::Calls::Update
       end
 
       def login
-        Zuora::Calls::Login
+        ZuoraPeriscope::Calls::Login
       end
 
       def subscribe
-        Zuora::Calls::Subscribe
+        ZuoraPeriscope::Calls::Subscribe
       end
 
       def amend
-        Zuora::Calls::Amend
+        ZuoraPeriscope::Calls::Amend
       end
 
       def query
-        Zuora::Calls::Query
+        ZuoraPeriscope::Calls::Query
       end
 
       def query_more
-        Zuora::Calls::QueryMore
+        ZuoraPeriscope::Calls::QueryMore
       end
 
       def delete
-        Zuora::Calls::Delete
+        ZuoraPeriscope::Calls::Delete
       end
 
       def generate
-        Zuora::Calls::Generate
+        ZuoraPeriscope::Calls::Generate
       end
 
       def method_missing

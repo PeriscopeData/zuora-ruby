@@ -9,7 +9,7 @@ describe 'executes a query_more request' do
   let(:username) { ENV['ZUORA_SANDBOX_USERNAME'] }
   let(:password) { ENV['ZUORA_SANDBOX_PASSWORD'] }
   let(:vcr_options) { { match_requests_on: [:path] } }
-  let(:client) { Zuora::Soap::Client.new(username, password, true) }
+  let(:client) { ZuoraPeriscope::Soap::Client.new(username, password, true) }
   let!(:auth_response) do
     VCR.use_cassette('soap/authentication_success') do
       client

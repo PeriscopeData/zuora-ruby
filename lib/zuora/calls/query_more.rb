@@ -8,7 +8,7 @@ module ZuoraPeriscope
       # The default batch size is 2000.  You can use a combination of query and
       # query_more calls to get large quantities of data.
       # @param [String] query_locator
-      # @return [Zuora::Calls:Query]
+      # @return [ZuoraPeriscope::Calls:Query]
       def initialize(query_locator)
         @query_locator = query_locator
       end

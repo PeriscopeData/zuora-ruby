@@ -3,13 +3,13 @@
 require 'spec_helper'
 require 'nokogiri'
 
-describe Zuora::Client do
+describe ZuoraPeriscope::Client do
   let(:username) { ENV['ZUORA_SANDBOX_USERNAME'] }
   let(:password) { ENV['ZUORA_SANDBOX_PASSWORD'] }
   let(:vcr_options) do
     { match_requests_on: [:path] }
   end
-  let(:client) { Zuora::Soap::Client.new(username, password, true) }
+  let(:client) { ZuoraPeriscope::Soap::Client.new(username, password, true) }
 
   context 'with correct credentials' do
     let(:auth_response) do
@@ -35,7 +35,7 @@ describe Zuora::Client do
       end
 
       before do
-        Zuora::RETRY_WAITING_PERIOD = 0.1
+        ZuoraPeriscope::RETRY_WAITING_PERIOD = 0.1
       end
 
       it 'retries the request' do
@@ -54,7 +54,7 @@ describe Zuora::Client do
     end
 
     it 'raises invalid credentials error' do
-      expect { subject }.to raise_error(Zuora::Errors::InvalidCredentials)
+      expect { subject }.to raise_error(ZuoraPeriscope::Errors::InvalidCredentials)
     end
   end
 end

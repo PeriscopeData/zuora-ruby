@@ -22,7 +22,7 @@ module ZuoraPeriscope
 
         lambda do |builder|
           builder[:api].send(call_name) do
-            Zuora::Utils::Envelope.build_objects builder, type, objects
+            ZuoraPeriscope::Utils::Envelope.build_objects builder, type, objects
           end
         end
       end

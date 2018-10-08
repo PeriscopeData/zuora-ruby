@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zuora::Response do
+describe ZuoraPeriscope::Response do
   describe '#handle_errors' do
     let(:response_hash) do
       { 'envelope' =>
@@ -33,7 +33,7 @@ describe Zuora::Response do
             }
           } }
     end
-    let(:response) { Zuora::Response.new(Faraday::Response.new) }
+    let(:response) { ZuoraPeriscope::Response.new(Faraday::Response.new) }
 
     before do
       hashie = Hashie::Mash.new(response_hash)
@@ -43,7 +43,7 @@ describe Zuora::Response do
     subject { response.handle_errors(response.to_h) }
 
     it 'raises errors' do
-      expect { subject }.to raise_error(Zuora::Errors::InvalidValue)
+      expect { subject }.to raise_error(ZuoraPeriscope::Errors::InvalidValue)
     end
   end
 end
