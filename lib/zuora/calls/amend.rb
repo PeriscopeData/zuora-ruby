@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Calls
     class Amend < Hashie::Dash
       property :amendments, required: true

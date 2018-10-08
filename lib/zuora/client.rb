@@ -4,7 +4,7 @@ require 'faraday'
 require 'faraday_middleware'
 require 'nokogiri'
 
-module Zuora
+module ZuoraPeriscope
   class Client
     attr_accessor :session_token
 

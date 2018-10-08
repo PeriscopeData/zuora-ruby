@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Calls
     class Generate < Hashie::Dash
       property :objects, required: true

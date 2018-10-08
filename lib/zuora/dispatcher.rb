@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Dispatcher
     # Maps a SOAP call name and args to its corresponding class.
 

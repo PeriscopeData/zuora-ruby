@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   VERSION = '0.7.0'
 end

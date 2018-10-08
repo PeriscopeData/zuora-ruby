@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Calls
     class Query < Hashie::Dash
       # This constructor has two arities.

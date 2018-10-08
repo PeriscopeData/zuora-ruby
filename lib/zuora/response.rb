@@ -2,7 +2,7 @@
 
 require 'active_support/core_ext/hash/conversions'
 
-module Zuora
+module ZuoraPeriscope
   class Response
     ERROR_STRINGS = ['Missing required value', 'are required fields'].freeze
     attr_reader :raw

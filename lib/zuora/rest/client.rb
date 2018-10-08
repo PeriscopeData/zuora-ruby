@@ -5,7 +5,7 @@ require 'faraday'
 require 'faraday_middleware'
 require 'json'
 
-module Zuora
+module ZuoraPeriscope
   module Rest
     class Client
       attr_reader :connection

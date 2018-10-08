@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   class Object < Hash
     include Hashie::Extensions::MethodAccess
   end

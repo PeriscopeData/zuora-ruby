@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Utils
     module Envelope
       CUSTOM_FIELD_STRING = '__c'

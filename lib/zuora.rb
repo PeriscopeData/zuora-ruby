@@ -8,7 +8,7 @@ require 'active_support'
 require 'active_support/core_ext/string'
 require 'hashie'
 
-module Zuora
+module ZuoraPeriscope
   API_URL = 'https://api.zuora.com/rest/v1/'
   SANDBOX_URL = 'https://apisandbox-api.zuora.com/rest/v1/'
   NAMESPACES = {

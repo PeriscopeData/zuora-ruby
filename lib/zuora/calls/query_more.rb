@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Zuora
+module ZuoraPeriscope
   module Calls
     class QueryMore < Hashie::Dash
       # After executing a query, often time a query_locator is returned when
