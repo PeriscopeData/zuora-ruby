@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'zuora/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'zuora-ruby'
+  spec.name = 'zuora-ruby-periscope'
   spec.version = Zuora::VERSION
   spec.authors = ['Contactually Engineering']
   spec.email = ['engineering@contactually.com']
