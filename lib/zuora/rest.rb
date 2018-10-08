@@ -2,7 +2,7 @@
 
 module ZuoraPeriscope
   module Rest
-    API_URL = 'https://api.zuora.com/rest/v1/'
+    API_URL = 'https://rest.zuora.com/v1/'
     SANDBOX_URL = 'https://apisandbox-api.zuora.com/rest/v1/'
 
     # Unable to connect. Check username / password
