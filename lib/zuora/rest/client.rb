@@ -111,7 +111,7 @@ module ZuoraPeriscope
       # @param [String] username
       # @param [String] password
       def set_auth_request_headers!(req, username, password)
-        req.url '/rest/v1/connections'
+        req.url '/v1/connections'
         req.headers['apiAccessKeyId'] = username
         req.headers['apiSecretAccessKey'] = password
         req.headers['Content-Type'] = 'application/json'
