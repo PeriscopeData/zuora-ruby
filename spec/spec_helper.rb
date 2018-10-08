@@ -6,7 +6,7 @@ if ENV['CIRCLECI']
   CodeClimate::TestReporter.start
 end
 
-require_relative '../lib/zuora'
+require_relative '../lib/zuora_periscope'
 
 require 'byebug'
 require 'factory_girl'
