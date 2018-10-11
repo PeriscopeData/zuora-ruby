@@ -92,7 +92,7 @@ module ZuoraPeriscope
       def fail_or_response(response)
         if response.status != 200
           raise(ErrorResponse.new("HTTP Status #{response.status}", response))
-        elsif !response.body['success']
+        elsif !response.body['success'] && !response.body['Success'] && !response.body['Status'] && !response.body.is_a?(String)
           errors = 'Not successful.'
 
           if response.body['reasons']

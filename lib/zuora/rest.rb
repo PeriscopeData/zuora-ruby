@@ -3,7 +3,7 @@
 module ZuoraPeriscope
   module Rest
     API_URL = 'https://rest.zuora.com/v1/'
-    SANDBOX_URL = 'https://apisandbox-api.zuora.com/rest/v1/'
+    SANDBOX_URL = 'https://rest.apisandbox.zuora.com/v1/'
 
     # Unable to connect. Check username / password
     ConnectionError = Class.new Errors::GenericError
